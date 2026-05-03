@@ -1,0 +1,131 @@
+/* 全站背景图（换成你的图片路径） */
+html, body {
+  background: url("/img/img2.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* 内容区域半透明（可选，不喜欢可删） */
+#content-inner {
+  background: rgba(255, 255, 255, 0.82);
+  border-radius: 14px;
+}
+[data-theme="dark"] #content-inner {
+  background: rgba(0, 0, 0, 0.55);
+}
+
+
+/* 给 page-header 叠一层渐变遮罩 */
+/* 确保 page-header 可叠加层 */
+#page-header {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 主遮罩：光斑 + 渐变，让图更梦幻、字更清晰 */
+#page-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255, 120, 180, 0.28), transparent 46%),
+    radial-gradient(circle at 80% 20%, rgba(120, 190, 255, 0.24), transparent 46%),
+    radial-gradient(circle at 60% 80%, rgba(255, 255, 255, 0.12), transparent 55%),
+    linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.42));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 轻微雾化层：提升“氛围感”（想更清晰可删掉这一段） */
+#page-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(1.5px);
+  -webkit-backdrop-filter: blur(1.5px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* 保证 header 内元素在遮罩之上 */
+#page-header #site-info,
+#page-header #nav {
+  position: relative;
+  z-index: 2;
+}
+
+/* 标题再增强一点对比度 */
+#site-title {
+  text-shadow:
+    0 12px 30px rgba(0,0,0,0.35),
+    0 0 18px rgba(255,120,180,0.25),
+    0 0 18px rgba(120,190,255,0.20);
+}
+
+
+
+
+/* 标题渐变 + 光晕 */
+#site-title {
+  font-weight: 900 !important;
+  letter-spacing: 1px;
+
+  background: linear-gradient(90deg, #ffffff 0%, #ffd1e8 45%, #cfe8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow:
+    0 10px 30px rgba(0,0,0,0.35),
+    0 0 22px rgba(255,120,180,0.25),
+    0 0 22px rgba(80,160,255,0.18);
+}
+
+/* 打字机副标题样式 */
+#site-subtitle.subtitle-typing {
+  margin-top: 10px;
+  font-size: 1.05rem;
+  font-weight: 650;
+  letter-spacing: 0.8px;
+  opacity: 0.96;
+
+  background: linear-gradient(90deg, #ffd1e8, #ffffff, #cfe8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  position: relative;
+  display: inline-block; /* 让光标贴着文字 */
+}
+
+/* 光标（竖线闪烁） */
+#site-subtitle.subtitle-typing::after {
+  content: "▋";
+  margin-left: 6px;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 10px 24px rgba(0,0,0,0.35);
+  animation: cursorBlink 0.9s steps(1) infinite;
+}
+
+@keyframes cursorBlink {
+  50% { opacity: 0; }
+}
+
+
+
+/* 让首页标题区域整体居中 */
+#site-info {
+  text-align: center !important;
+}
+
+/* 副标题居中（配合打字机样式） */
+#site-subtitle.subtitle-typing {
+  display: block !important;     /* 改成块级元素，天然占满一行 */
+  width: 100%;
+  text-align: center !important;
+}
+
+/* 光标仍然跟在文字后面：把文字包在 inline-block 内更精确（可选） */
+#site-subtitle.subtitle-typing::after {
+  position: relative;
+}

@@ -5,15 +5,15 @@
 # Site
 title: Ka1saaa's Blog
 subtitle: ''
-description: ''
-keywords:
-author: John Doe
-language: en
-timezone: ''
+description: '一位misc小区的随笔'
+keywords: misc
+author: Ka1saaa
+language: zh-CN
+timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://ka1saaa.github.io
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -47,6 +47,7 @@ syntax_highlighter: highlight.js
 highlight:
   line_number: true
   auto_detect: false
+
   tab_replace: ''
   wrap: true
   hljs: false
@@ -102,3 +103,15 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: ''
+
+search:
+  path: search.xml
+  field: post
+  content: true
+  format: html
+  
+# 评论RSS
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
