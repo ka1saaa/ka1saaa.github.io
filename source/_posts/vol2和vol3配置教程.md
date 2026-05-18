@@ -111,4 +111,102 @@ chmod +x vol3
 ```
 然后就可以使用./vol3进行做题了
 
+# volatility2补充 
+由于我电脑内存爆炸了，所以我重装了一次电脑，但是就在我在wsl里再次安装vol2的时候，发现按照我上面的步骤不行了，主要就是python2和其pip安装的问题，没招了，所以我在这里给出其他解决方案
+
+```
+# 各位按照上面步骤安装时
+sudo apt install -y python2 python2-dev libpython2-dev build-essential git libdistorm3-dev yara libraw1394-11 libcap2-bin
+
+# 应该会显示这个
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+Package python2 is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Package 'python2' has no installation candidate
+E: Unable to locate package python2-dev
+E: Unable to locate package libpython2-dev
+```
+
+这报错也很简单，就是仓库里已经默认移除了   
+`python2 / python2-dev / libpython2-dev`  
+
+我们要安装python2，这里建议用 pyenv/源码装 Python 2.7，装一个隔离的python2  
+
+1.安装依赖   
+```
+sudo apt update
+sudo apt install -y build-essential git curl \
+  libssl-dev zlib1g-dev libb2-dev libreadline-dev libsqlite3-dev \
+  libffi-dev liblzma-dev
+```   
+
+2.安装pyenv
+```
+curl https://pyenv.run | bash
+```
+
+然后把
+```
+export PATH="$HOME/.pyenv/bin:$PATH"  
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+```
+这三行加入`~/.bashrc`
+```
+cat <<'EOF' >> ~/.bashrc
+
+# pyenv
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+EOF
+```
+
+然后让它生效  
+```
+source ~/.bashrc
+```
+
+验证
+```
+command -v pyenv
+pyenv --version
+```
+
+3.接下来安装python2
+```
+pyenv install 2.7.18
+pyenv global 2.7.18
+python --version
+```
+这样python2基本就安装成功了
+
+还有pip2的安装
+```
+sudo python2 -m pip install -U setuptools wheel
+
+sudo: python2: command not found
+```
+会显示找不到python2，这是正常现象：你用 pyenv 装的 python2 在你的用户环境 PATH 里可用，但 sudo 默认会用“更干净的 PATH”，不会加载你的 ~/.bashrc，所以找不到 python2
+
+注意：其实可以把`sudo`删掉试试，包括后面一切需要用到`sudo python2`的命令都可以这样
+
+这里安装的隔离的python2.7.18是自带pip的  
+`python2 -m pip --version || true`  
+这条命令是可以检测的  
+如果没有的话
+```
+curl -sS https://bootstrap.pypa.io/pip/2.7/get-pip.py -o /tmp/get-pip.py
+python2 /tmp/get-pip.py
+
+# 升级
+python2 -m pip install -U --user setuptools wheel
+```
+后续的操作基本没问题，有问题我还会修改的  
+谢谢各位观看喵~  
+
 文章作者: ka1saaa
