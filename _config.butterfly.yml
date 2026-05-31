@@ -1065,7 +1065,7 @@ inject:
 
   bottom:
      - <script src="/js/custom.js"></script>
-
+     - <script src="/js/music.js"></script>
 # CDN Settings
 # Don't modify the following settings unless you know how they work
 CDN:

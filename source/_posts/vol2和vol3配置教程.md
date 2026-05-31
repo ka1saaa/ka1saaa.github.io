@@ -136,7 +136,7 @@ E: Unable to locate package libpython2-dev
 
 我们要安装python2，这里建议用 pyenv/源码装 Python 2.7，装一个隔离的python2  
 
-1.安装依赖   
+1.安装依赖
 
 ```
 sudo apt update
